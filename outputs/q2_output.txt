@@ -1,0 +1,54 @@
+Device: cuda (AMD Radeon RX 9070 XT)
+PyTorch 2.6.0+rocm6.4.2.git76481f7c
+Classes: ['ants', 'bees']
+Train images: 244   Val images: 153
+Epochs: 10   Batch size: 16   LR: 0.001   Optimizer: SGD(momentum=0.9)
+
+======================================================================
+Experiment A - Frozen Feature Extractor (train fc only)
+======================================================================
+Total parameters     : 11,177,538
+Trainable parameters : 1,026  (0.01%)
+Compute per step     : 44.8 ms (forward+backward+update, batch 16, no data loading)
+Epoch  1/10  train loss 0.7513  val acc 69.28%
+Epoch  2/10  train loss 0.4548  val acc 91.50%
+Epoch  3/10  train loss 0.3598  val acc 90.85%
+Epoch  4/10  train loss 0.2884  val acc 94.77%
+Epoch  5/10  train loss 0.2401  val acc 94.77%
+Epoch  6/10  train loss 0.2148  val acc 93.46%
+Epoch  7/10  train loss 0.2531  val acc 94.12%
+Epoch  8/10  train loss 0.2302  val acc 93.46%
+Epoch  9/10  train loss 0.3750  val acc 93.46%
+Epoch 10/10  train loss 0.2340  val acc 96.08%
+Training time        : 14.3 s
+Final val accuracy   : 96.08%
+Best val accuracy    : 96.08% (epoch 10)
+
+======================================================================
+Experiment B - Fine-Tuned Network (train layer4 + fc)
+======================================================================
+Total parameters     : 11,177,538
+Trainable parameters : 8,394,754  (75.10%)
+Compute per step     : 58.3 ms (forward+backward+update, batch 16, no data loading)
+Epoch  1/10  train loss 0.6640  val acc 83.66%
+Epoch  2/10  train loss 0.3340  val acc 93.46%
+Epoch  3/10  train loss 0.2415  val acc 92.81%
+Epoch  4/10  train loss 0.1807  val acc 94.77%
+Epoch  5/10  train loss 0.1989  val acc 94.12%
+Epoch  6/10  train loss 0.1582  val acc 94.12%
+Epoch  7/10  train loss 0.2131  val acc 93.46%
+Epoch  8/10  train loss 0.1517  val acc 94.12%
+Epoch  9/10  train loss 0.1231  val acc 94.77%
+Epoch 10/10  train loss 0.1923  val acc 94.12%
+Training time        : 17.2 s
+Final val accuracy   : 94.12%
+Best val accuracy    : 94.77% (epoch 4)
+
+Saved loss plot to /mnt/c/claude/cs5720-home-assignment-3/outputs/q2_training_loss.png
+
+Comparison:
+
+| Method | Trainable Parameters | Training Time (10 epochs) | GPU Compute per Step | Accuracy (val, final) | Accuracy (val, best) |
+|---|---|---|---|---|---|
+| Frozen Feature Extractor | 1,026 of 11,177,538 | 14.3 s | 44.8 ms | 96.08% | 96.08% |
+| Fine-Tuned Network | 8,394,754 of 11,177,538 | 17.2 s | 58.3 ms | 94.12% | 94.77% |
