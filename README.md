@@ -208,3 +208,9 @@ Both approaches land in the same neighborhood on the validation set, 96.1% froze
 ### A note on fair timing
 
 The first version of this script timed Experiment A at 31.9 s and Experiment B at 23.6 s, the opposite of what the parameter counts predict. The reason was ordering, not freezing: Experiment A ran first and paid every one-time cost (spawning DataLoader workers, decoding all JPEGs into the OS file cache, and the GPU runtime selecting kernels for each layer shape), and Experiment B inherited a warm system. The script now runs one untimed warm-up epoch plus a few synthetic batches before starting the clock for each experiment, and additionally reports a pure-compute ms-per-step figure with no data loading at all. With that bias removed the numbers line up with the theory.
+
+---
+
+## AI Use
+
+Claude (Anthropic) was used as a coding assistant on this assignment: to help structure the project layout, double-check the Python code for correctness, grammar- and fact-check the README write-ups against the saved outputs, and add inline comments. All code logic and explanations are my own work, and every number, table, and plot in this repo comes from my own runs on my machine.
